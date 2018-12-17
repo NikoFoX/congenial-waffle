@@ -1,0 +1,12 @@
+<h1> Django Queryset </h1>
+{{ text }}
+<br><br>
+<h1> SQL Query </h1>
+{{ text.query }}
+
+<h1> OUTPUT </h1>
+<ul>
+{% for element in text %}
+  <li> {{ element }} </li>
+{% endfor %}
+</ul>

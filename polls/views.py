@@ -1,18 +1,39 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.http import Http404
 from .models import Question
+from django.db.models import Q
 
 def index(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    output = ', '.join([q.question_text for q in latest_question_list])
-    return HttpResponse("Hello kind user! Here's your poll index." +
-                        "Latest questions: {0}".format(output))
+    # output = ', '.join([q.question_text for q in latest_question_list])
+    # template = loader.get_template('polls/index.html')
+    # message = "Hello kind user! Here's your poll index."
+    context = {
+        'latest_question_list': latest_question_list,
+    }
+    return render(request, 'polls/index.html', context)
 
 def detail(request, question_id):
-    return HttpResponse("Here's your question: {0}.".format(question_id))
+    """
+    try:
+        question = Question.objects.get(pk=question_id)
+    except Question.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'polls/detail.html', {'question': question})
+    """
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'polls/detail.html', {'question':question})
+    # return HttpResponse("Here's your question: {0}.".format(question_id))
 
 def results(request, question_id):
     return HttpResponse("Results of the question: {0}".format(question_id))
 
 def vote(request, question_id):
     return HttpResponse("Votes of question: {0}".format(question_id))
+
+def test(request):
+    #text = Question.objects.filter(question_text__startswith = {"W", "H"}
+    text = Question.objects.filter(Q(question_text__startswith="W")|Q(question_text__startswith="H"))
+    #text = str(text)
+    return render(request, 'polls/test.html', {"text":text}, content_type=None, status=None, using=None)

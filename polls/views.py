@@ -45,8 +45,13 @@ def vote(request, question_id):
         selected_choice.save()
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
+def info(request):
+    return render(request, 'polls/info.html')
+
+def map(request):
+    return render(request, 'polls/map.html')
+
 def test(request):
     #text = Question.objects.filter(question_text__startswith = {"W", "H"}
     text = Question.objects.filter(Q(question_text__startswith="W")|Q(question_text__startswith="H"))
-    #text = str(text)
     return render(request, 'polls/test.html', {"text":text}, content_type=None, status=None, using=None)

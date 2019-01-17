@@ -5,7 +5,7 @@ from django.utils import timezone
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
-    pub_date = models.DateTimeField('date published')
+    pub_date = models.DateTimeField('date published', default=datetime.datetime.now())
 
     def __str__(self):
         return self.question_text
@@ -19,9 +19,15 @@ class Question(models.Model):
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
+    choice_text = models.CharField(max_length=200, help_text="Text of the choice")
     votes = models.IntegerField(default=0)
     #choice_rank = models.IntegerField(default=0)
+
+    def Choice(self, text):
+        choice_text = str(text)
+
+    def _int_(self):
+        return self.choice_text
 
     def __str__(self):
         return self.choice_text

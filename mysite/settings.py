@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD':'postgres',
-        'HOST':'127.0.0.1',
+        'NAME': 'bwanuizo',
+        'USER': 'bwanuizo',
+        'PASSWORD':'nAHh3n5TARCvpy3T5VGzlc4Obv1NLMBE',
+        'HOST':'manny.db.elephantsql.com',
         'PORT':'5432',
     }
 }
@@ -110,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'CET'
+TIME_ZONE = 'Europe/Warsaw'
 
 USE_I18N = True
 
@@ -123,3 +123,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
